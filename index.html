@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auspian Intelligence</title>
+  <meta name="description" content="Auspian Intelligence — Observe. Reason. Understand. Trust.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lora:wght@500&family=Inter:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1a2c;
+      --bg-deep: #0a1322;
+      --footer-bg: #0b1424;
+      --text: #f4f4f2;
+      --accent: #2bb5a0;
+      --muted: #8a96a8;
+      --grid: rgba(43, 181, 160, 0.08);
+      --rule: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Layer 1: base gradient + faint terrain texture (like satellite imagery) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(30, 48, 74, 0.55) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 90%, rgba(60, 78, 100, 0.35) 0%, transparent 45%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2000' height='1400' viewBox='0 0 2000 1400' preserveAspectRatio='xMidYMid slice'><filter id='t'><feTurbulence type='fractalNoise' baseFrequency='0.0025 0.006' numOctaves='5' seed='7'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.65  0 0 0 0 0.78  0 0 0 1.4 -0.55'/></filter><rect x='0' y='0' width='2000' height='1400' filter='url(%23t)' opacity='0.22'/></svg>"),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    /* Layer 2: subtle cartographic grid with vignette */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 80px 80px;
+      background-position: center center;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, rgba(0,0,0,0.45) 100%);
+              mask-image: radial-gradient(ellipse at center, #000 40%, rgba(0,0,0,0.45) 100%);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 16px 6rem;
+    }
+
+    h1 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.75rem, 10vw, 8.5rem);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .tagline {
+      margin-top: 1.25rem;
+      font-family: "Lora", Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(0.9rem, 1.8vw, 1.35rem);
+      letter-spacing: 0.22em;
+      color: var(--accent);
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      background: rgba(11, 20, 36, 0.85);
+      padding: 1.5rem 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      h1, .tagline { animation: rise 1.2s ease-out both; }
+      .tagline { animation-delay: 0.25s; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: none; }
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Auspian Intelligence</h1>
+    <p class="tagline">Observe. Reason. Understand. Trust.</p>
+  </main>
+  <footer>
+    &copy; <span id="year">2026</span> Auspian Intelligence. All rights reserved.
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
